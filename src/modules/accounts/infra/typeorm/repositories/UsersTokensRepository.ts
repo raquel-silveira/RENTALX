@@ -17,6 +17,8 @@ class UsersTokensRepository implements IUsersTokensRepository {
     refresh_token,
     user_id,
   }: ICreateUserTokenDTO): Promise<UserTokens> {
+    await this.repository.delete({ user_id });
+
     const userToken = this.repository.create({
       expires_date,
       refresh_token,
